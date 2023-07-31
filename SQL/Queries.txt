@@ -1,1 +1,15 @@
-SQL Assignment
+Topic - Condition + String matching + logical operator
+
+1) SELECT CustomerId , FirstName , LastName, City from customers where FirstName like 'N%' or City ='Oslo';
+2) SELECT TrackId, Name, Composer, UnitPrice from tracks where UnitPrice BETWEEN 0 and 1 and Composer not like '%T%';
+
+Topic - Group By, Order By
+3) SELECT InvoiceDate, sum(Total), avg(Total) FROM Invoices 
+   WHERE InvoiceDate BETWEEN "2020-06-01 00:00:00" AND "2020-06-30 11:59:59" GROUP BY InvoiceDate;
+
+4) SELECT TrackId,count(TrackId) as Total from invoice_items group by TrackId order by count(TrackId) DESC;
+
+Topic - Join/Subqueries
+5) select distinct albums.ArtistId, artists.Name from albums inner join artists on artists.ArtistId = albums.ArtistId where albums.Title not in (select tracks.Name from playlist_track inner join tracks where playlist_track.TrackId=tracks.TrackId);
+
+6) select albums.AlbumId, albums.Title from albums inner join tracks on tracks.AlbumId=albums.AlbumId where tracks.TrackId in (select playlist_track.TrackId from playlist_track group by playlist_track.TrackId having count(playlist_track.TrackId) > 10);
